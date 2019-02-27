@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Exercise Tracker | Free Code Camp</title>
+      <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+      <link href="style.css" rel="stylesheet" type="text/css">
+   </head>
+
+   <body>
+     <div class="header">
+       
+     </div>
+      <div class="container">  
+        <h1>EXERCISE TRACKER</h1>
+        <div id="form">
+          <form action="/api/exercise/new-user" method="post">            
+            <h3>Create a New User</h3>
+            <p><code>POST /api/exercise/new-user</code></p>
+            <input id="uname" type="text" name="username" placeholder="username">
+            <input type="submit" value="Submit">
+          </form>
+          <form action="/api/exercise/add" method="post">
+            <h3>Add exercises</h3>
+            <p><code>POST /api/exercise/add</code></p>
+            <input id="uid" type="text" name="userId" placeholder="userId*" required>
+            <input id="desc" type="text" name="description" placeholder="description*" maxlength= "40" required>
+            <input id="dur" type="Number" name="duration" placeholder="duration* (mins.)" min="0" max="10000" required>
+            <input id="dat" type="text" name="date" placeholder="date (yyyy-mm-dd)">
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+        <div id="instructions">
+          <h3>
+            options:
+          </h3>
+          <ol>
+            <li>You can get an array of all users use <a target="_blank" href="https://exertracker-olesia.glitch.me/api/exercise/users">api/exercise/users</a></li>
+            <li>
+              <div id="getlink">
+                <p>You can enter a user's id in the second form to get a link to his full exercise log</p>
+                
+                <div id="copyLink">
+                  <input type="text" id="link">
+                  <button onclick="getLink()">Get a link</button>
+                  <button onclick="copyLink()">Copy link</button>
+                </div>            
+              </div>
+            </li>
+            <li>
+              <p>You can also retrieve part of the log of any user by also passing along optional parameters of <strong>from & to or limit. (Date format yyyy-mm-dd, limit = int)</strong></p>
+              <p><strong>GET users's exercise log examples: </strong></p>
+                <ul>
+                   <li><a target="_blank" href="https://exertracker-olesia.glitch.me/api/exercise/log?userId=4BR1Nv38g&from=2017-01-01&to=2018-12-31&limit=1"> 
+                     /api/exercise/log?userId=4BR1Nv38g&from=2017-01-01&to=2018-12-31&limit=1</a></li>
+                  <li><a target="_blank" href="https://exertracker-olesia.glitch.me/api/exercise/log?userId=bOFcWOq5o&from=2019-01-01&limit=3">
+                    /api/exercise/log?userId=bOFcWOq5o&from=2019-01-01&limit=3</a></li>
+                </ul> 
+            </li>
+          </ol>               
+        </div>             
+      </div>
+     <footer>by Olesia Sviren</footer>
+   </body>
+<script>
+function getLink () {
+  var id = document.getElementById('uid').value;
+  var x = document.getElementById('link');  
+  x.setAttribute("value", "https://exertracker-olesia.glitch.me/api/exercise/log?userId="+id);
+  document.getElementById('getLink').appendChild(x);
+}
+ function copyLink () {
+  var copyText = document.getElementById("link");
+  copyText.select();
+  document.execCommand("copy");
+ } 
+</script>
+</html>
